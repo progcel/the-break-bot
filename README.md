@@ -8,6 +8,6 @@ Discord bot for Breakcels.
 Notifies when the Break uploads a new video.
 
 ## Commands
-`break video` fetches the latest Break video.
+`br video` fetches the latest Break video (case insensitive)
 
-`break stats` feches the latest Break stats.
+`br stats` feches the latest Break stats (case insensitive)
