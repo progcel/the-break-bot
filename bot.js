@@ -3,6 +3,7 @@ const cron = require("node-cron");
 const discord = require('discord.js');
 const apiCaller = require('./apicaller');
 const databaseHandler = require('./databasehandler');
+const adminId = '<@660921536386957336>'
 
 const discordBot = new discord.Client();
 
@@ -31,21 +32,29 @@ discordBot.on('ready', async () => {
 });
 
 discordBot.on('message', async function (message) {
-  let command = message.content.trim();
+  let command = message.content.trim().toLowerCase();
 
-  if (command === 'break video') {
+  if (command === 'br video') {
     let videoInfo = await apiCaller.getVideoInfo();
 
-    if(videoInfo) {
+    if (videoInfo) {
       message.reply(`${videoInfo.url}`);
     }
+    else {
+      message.reply(`something went wrong \:sob: ${adminId}`);
+    }
   }
-  else if (command == 'break stats') {
+  else if (command == 'br stats') {
     let stats = await apiCaller.getStats();
 
-    if(stats) message.reply(`these are the latest Break numbers:
-    Total views: ${stats.viewCount}
-    Total subscribers: ${stats.subscriberCount}`);
+    if (stats) {
+      message.reply(`these are the latest Break numbers:
+      Total views: ${stats.viewCount}
+      Total subscribers: ${stats.subscriberCount}`);
+    }
+    else {
+      message.reply(`something went wrong \:sob: ${adminId}`);
+    }
   }
 });
 
