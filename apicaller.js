@@ -8,8 +8,8 @@ const youtubePrefix = 'https://www.youtube.com/watch?v='
 
 axiosRetry(axios, { retries: 1, retryDelay: 2000 });
 
-module.exports = {
-  getVideoInfo: async function () {
+class ApiCaller {
+  async getVideoInfo () {
     try {
       let response = await axios.get(youtubeApi);
       
@@ -20,9 +20,9 @@ module.exports = {
     } catch (e) {
       console.error(e);
     }
-  },
+  }
 
-  getStats: async function () {
+  async getStats () {
     try {
       let response = await axios.get(youtubeStatsApi);
       
@@ -34,4 +34,6 @@ module.exports = {
       console.error(e);
     }
   }
-};
+}
+
+module.exports = ApiCaller;

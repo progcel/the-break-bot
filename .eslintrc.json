@@ -12,6 +12,9 @@
     },
     "rules": {
         "indent": ["warn", 2],
-        "no-trailing-spaces": ["warn", { "skipBlankLines": true }]
+        "no-trailing-spaces": ["warn", { "skipBlankLines": true }],
+        "space-before-function-paren": ["error", "always"],
+        "no-multiple-empty-lines": "error",
+        "eol-last": ["error", "always"]
     }
 }

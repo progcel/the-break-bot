@@ -1,8 +1,8 @@
 const pgp = require('pg-promise')();
 const db = pgp(process.env.DATABASE_URL);
 
-module.exports = {
-  shouldNotify: async function (url, publishedAt) {
+class DatabaseHandler {
+  async shouldNotify (url, publishedAt) {
     let publishedAtInteger = Date.parse(publishedAt);
 
     let videos;
@@ -49,4 +49,6 @@ module.exports = {
       }
     }
   }
-};
+}
+
+module.exports = DatabaseHandler;

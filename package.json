@@ -1,7 +1,9 @@
 {
   "name": "the-break-bot",
   "version": "1.0.0",
-  "description": "",
+  "engines": {
+    "node": "13.13.0"
+  },
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"

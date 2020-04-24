@@ -1,60 +1,25 @@
 require('dotenv').config();
-const cron = require("node-cron");
 const discord = require('discord.js');
-const apiCaller = require('./apicaller');
-const databaseHandler = require('./databasehandler');
+const ApiCaller = require('./apicaller');
+const CommandHandler = require('./commandhandler');
+const DatabaseHandler = require('./databasehandler');
+const Scheduler = require('./scheduler');
 
 const discordBot = new discord.Client();
-
-async function setupScheduler(){
-  cron.schedule("*/25 * * * *", async function() {
-    await newVideoNotify();
-  });
-}
-
-async function newVideoNotify() {
-  let videoInfo = await apiCaller.getVideoInfo();
-  if (videoInfo == undefined) return;
-
-  let notify = await databaseHandler.shouldNotify(videoInfo.url, videoInfo.publishedAt);
-
-  if (notify) {
-    let channel = discordBot.channels.cache.get(process.env.DISCORD_CHANNEL_ID);
-    channel.send(`${videoInfo.url}`);
-  }
-}
+const apiCaller = new ApiCaller();
+const databaseHandler = new DatabaseHandler();
+const commandHandler = new CommandHandler(apiCaller);
+const scheduler = new Scheduler(discordBot, apiCaller, databaseHandler);
 
 discordBot.on('ready', async () => {
   console.log('Bot is online!');
 
-  await setupScheduler();
+  await scheduler.activate();
 });
 
 discordBot.on('message', async function (message) {
-  let command = message.content.trim().toLowerCase();
-
-  if (command === 'br video') {
-    let videoInfo = await apiCaller.getVideoInfo();
-
-    if (videoInfo) {
-      message.reply(`${videoInfo.url}`);
-    }
-    else {
-      message.reply(`something went wrong \:sob: ${process.env.DEVELOPER_ID}`);
-    }
-  }
-  else if (command == 'br stats') {
-    let stats = await apiCaller.getStats();
-
-    if (stats) {
-      message.reply(`these are the latest Break numbers:
-      Total views: ${stats.viewCount}
-      Total subscribers: ${stats.subscriberCount}`);
-    }
-    else {
-      message.reply(`something went wrong \:sob: ${process.env.DEVELOPER_ID}`);
-    }
-  }
+  let response = await commandHandler.handle(message.content);
+  if (response) message.reply(response);
 });
 
 discordBot.login(process.env.BOT_TOKEN);
