@@ -3,7 +3,6 @@ const cron = require("node-cron");
 const discord = require('discord.js');
 const apiCaller = require('./apicaller');
 const databaseHandler = require('./databasehandler');
-const adminId = '<@660921536386957336>'
 
 const discordBot = new discord.Client();
 
@@ -41,7 +40,7 @@ discordBot.on('message', async function (message) {
       message.reply(`${videoInfo.url}`);
     }
     else {
-      message.reply(`something went wrong \:sob: ${adminId}`);
+      message.reply(`something went wrong \:sob: ${process.env.DEVELOPER_ID}`);
     }
   }
   else if (command == 'br stats') {
@@ -53,7 +52,7 @@ discordBot.on('message', async function (message) {
       Total subscribers: ${stats.subscriberCount}`);
     }
     else {
-      message.reply(`something went wrong \:sob: ${adminId}`);
+      message.reply(`something went wrong \:sob: ${process.env.DEVELOPER_ID}`);
     }
   }
 });
