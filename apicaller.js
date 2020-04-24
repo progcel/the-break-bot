@@ -6,7 +6,7 @@ const youtubeApi = `https://www.googleapis.com/youtube/v3/search?part=snippet&ch
 const youtubeStatsApi = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${breakChannelId}&key=${process.env.YOUTUBE_API_TOKEN}`
 const youtubePrefix = 'https://www.youtube.com/watch?v='
 
-axiosRetry(axios, { retries: 5, retryDelay: 1000 });
+axiosRetry(axios, { retries: 1, retryDelay: 2000 });
 
 module.exports = {
   getVideoInfo: async function () {

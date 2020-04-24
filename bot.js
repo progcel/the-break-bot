@@ -7,7 +7,7 @@ const databaseHandler = require('./databasehandler');
 const discordBot = new discord.Client();
 
 async function setupScheduler(){
-  cron.schedule("*/10 * * * *", async function() {
+  cron.schedule("*/25 * * * *", async function() {
     await newVideoNotify();
   });
 }
