@@ -8,9 +8,9 @@ class Scheduler {
   }
 
   async activate () {
-    //cron.schedule("*/25 * * * *", async function() {
+    cron.schedule("*/25 * * * *", async function () {
       await this._newVideoNotify();
-    //});
+    });
   }
 
   async _newVideoNotify () {
