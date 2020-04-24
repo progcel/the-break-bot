@@ -10,7 +10,7 @@ module.exports = {
       videos = await db.any('SELECT * FROM videos;');
     }
     catch(e) {
-      console.log(err);
+      console.log(e);
       return false;
     }
 
@@ -19,11 +19,14 @@ module.exports = {
 
       if (publishedAtInteger > currentPublishedAt) {
         try {
-          db.none(`UPDATE videos SET published_at = ${publishedAtInteger}, url = '${url}' WHERE published_at = ${currentPublishedAt};`);
+          await db.none(
+            'UPDATE videos SET published_at = $1, url = $2 WHERE published_at = $3',
+            [publishedAtInteger, url, currentPublishedAt]
+          );
           return true;
         }
         catch(e) {
-          console.log(err);
+          console.log(e);
           return false;
         }
       }
@@ -33,10 +36,13 @@ module.exports = {
     }
     else {
       try {
-        db.none(`INSERT INTO videos(url, published_at) VALUES ('${url}', ${publishedAtInteger})`);
+        await db.none(
+          'INSERT INTO videos(url, published_at) VALUES ($1, $2)',
+          [url, publishedAtInteger]
+        );
       }
       catch(e) {
-        console.log(err);
+        console.log(e);
       }
       finally {
         return false;
