@@ -1,5 +1,6 @@
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
+const logger = require('./logger')
 
 const breakChannelId = 'UC6Ff1z4MhKDDLEUqH_hisyQ';
 const youtubeApi = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${breakChannelId}&maxResults=1&order=date&key=${process.env.YOUTUBE_API_TOKEN}`
@@ -18,7 +19,7 @@ class ApiCaller {
         publishedAt: response.data.items[0].snippet.publishedAt,
       };
     } catch (e) {
-      console.error(e);
+      logger.logError(e);
     }
   }
 
@@ -31,7 +32,7 @@ class ApiCaller {
         subscriberCount: response.data.items[0].statistics.subscriberCount
       };
     } catch (e) {
-      console.error(e);
+      logger.logError(e);
     }
   }
 }
