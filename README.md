@@ -1,6 +1,8 @@
 # The Break Bot
 ![The Break](the-break.jpg)
 
+![CI](https://github.com/progcel/the-break-bot/workflows/CI/badge.svg)
+
 ## What it is
 Discord bot for Breakcels.
 
