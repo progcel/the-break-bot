@@ -10,7 +10,7 @@ class Tasks {
     if (videoInfo == undefined) return;
     
     let notify = await this.databaseHandler.shouldNotify(videoInfo.url, videoInfo.publishedAt);
-    if (notify) channel.send(`${videoInfo.url}`);
+    if (notify) this.channel.send(`${videoInfo.url}`);
   }
 }
 
