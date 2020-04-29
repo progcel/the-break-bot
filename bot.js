@@ -10,10 +10,11 @@ const discordBot = new discord.Client();
 const apiCaller = new ApiCaller();
 const databaseHandler = new DatabaseHandler();
 const commandHandler = new CommandHandler(apiCaller);
-const tasks = new Tasks(discordBot, apiCaller, databaseHandler);
 
 discordBot.on('ready', async () => {
   console.log('Bot is online!');
+
+  const tasks = new Tasks(discordBot, apiCaller, databaseHandler);
 
   // At every 10th minute past every hour from 9 (UTC) through 20 (UTC)
   cron.schedule("*/10 9-20 * * *", async () => {
