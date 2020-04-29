@@ -31,9 +31,9 @@ describe('CommandHandler', function () {
     const result = await commandHandler.handle('br stats');
 
     // Assert
-    expect(result).to.eql(`these are the latest Break numbers:
-      Total views: 1
-      Total subscribers: 2`);
+    expect(result).to.eql('these are the latest Break numbers:\n' +
+                           'Total views: 1\n' +
+                           'Total subscribers: 2');
   });
 
   it('returns nothing for unsupported command', async function () {

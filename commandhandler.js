@@ -15,9 +15,9 @@ class CommandHandler {
     else if (command === 'br stats') {
       let stats = await this.apiCaller.getStats();
       if (stats) {
-        result = `these are the latest Break numbers:
-      Total views: ${stats.viewCount}
-      Total subscribers: ${stats.subscriberCount}`;
+        result = 'these are the latest Break numbers:\n' +
+                 'Total views: ' + stats.viewCount + '\n' +
+                 'Total subscribers: ' + stats.subscriberCount;
       }
     }
     else {
