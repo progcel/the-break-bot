@@ -10,6 +10,10 @@ Discord bot for Breakcels.
 Notifies when the Break uploads a new video.
 
 ## Commands
-`br video` fetches the latest Break video (case insensitive)
+All commands are case insensitive.
 
-`br stats` feches the latest Break stats (case insensitive)
+`br video` fetches the latest Break video
+
+`br stats` feches the latest Break stats
+
+`br mishok` feches the Break ab wheel gif
