@@ -1,3 +1,5 @@
+const breakGif = 'https://i.imgur.com/Kgk6fhR.mp4';
+
 class CommandHandler {
   constructor (apiCaller) {
     this.apiCaller = apiCaller;
@@ -19,6 +21,9 @@ class CommandHandler {
                  'Total views: ' + stats.viewCount + '\n' +
                  'Total subscribers: ' + stats.subscriberCount;
       }
+    }
+    else if (command === 'br mishok') {
+      result = breakGif;
     }
     else {
       return;
