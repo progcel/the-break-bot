@@ -17,7 +17,7 @@ discordBot.on('ready', async () => {
   const tasks = new Tasks(discordBot, apiCaller, databaseHandler);
 
   // At every 10th minute past every hour from 8 (UTC) through 20 (UTC)
-  cron.schedule("*/10 8-20 * * *", async () => {
+  cron.schedule("*/10 9-20 * * *", async () => {
     await tasks.newVideoNotify();
   });
 });
